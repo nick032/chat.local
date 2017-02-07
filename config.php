@@ -1,7 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Nick
- * Date: 13.01.2017
- * Time: 15:16
- */
+define('PUBLIC_DIR', 'HTTP://'.$_SERVER['SERVER_NAME'].'/public/');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'chat');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_CHAR', 'utf8');
