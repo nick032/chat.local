@@ -10,7 +10,7 @@
 <body>
     <div class="wrapper">
         <div class="login-form">
-            <form action="/" method="post">
+            <form action="/auth" method="post">
                 <input type="text" name="userName">
                 <input type="submit" name="login">
             </form>

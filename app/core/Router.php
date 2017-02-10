@@ -4,7 +4,6 @@ class Router
     private static $routes = array();
     private static $params = array();
     private static $requestedUrl = '';
-
     /*
      * Добавление маршрута
      */
@@ -32,7 +31,8 @@ class Router
          * */
         if($requestedUrl === null){
             $uri = reset(explode('?', $_SERVER['REQUEST_URI']));
-            $requestedUrl = urldecode(rtrim($uri, '/'));
+            //$requestedUrl = urldecode(rtrim($uri, '/'));
+            $requestedUrl = urldecode($uri);
         }
         self::$requestedUrl = $requestedUrl;
         /*
@@ -40,15 +40,16 @@ class Router
          * */
         if(isset(self::$routes[$requestedUrl])){
             self::$params = self::splitUrl(self::$routes[$requestedUrl]);
-            print_r(self::$params);
             return self::executeAction();
         }
         foreach(self::$routes as $route => $uri){
             //Заменем WildCards на регулярное ввыражение
             if(strpos($route, ':') !== false){
-                $route = str_replace(':any', '(.+)', str_replace(':num', '([0-9]+)', $route));
+                $route = str_replace(':any', '()', str_replace(':num', '([0-9]+|)', $route));
             }
-            if(preg_match('#^'.$route.'$#', $requestedUrl)){
+            echo $route . " - ". $requestedUrl . "<br>";
+            if(preg_match('#^'.$route.'$#i', $requestedUrl)){
+                echo 1;
                 if(strpos($uri, '$') !== false && strpos($route, '(') !== false){
                     $uri = preg_replace('#^'.$route.'$#', $uri, $requestedUrl);
                 }
@@ -56,13 +57,12 @@ class Router
                 break; //URL обработан
             }
         }
-        print_r(self::$params);
         return self::executeAction();
     }
     public static function executeAction()
     {
-        $controller = isset(self::$params[0]) ? self::$params[0] : 'DefaultController';
-        $action = isset(self::$params[1]) ? self::$params[1] : 'DefaultAction';
+        $controller = isset(self::$params[0]) ? self::$params[0] : 'MainController';
+        $action = isset(self::$params[1]) ? self::$params[1] : 'Index';
         $params = array_slice(self::$params, 2);
         return call_user_func_array(array($controller, $action), $params);
     }
