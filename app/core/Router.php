@@ -24,13 +24,14 @@ class Router
     /*
      * Обработка полученного url
      * */
-    public static function dispatch($requstedUrl = null)
+    public static function dispatch($requestedUrl = null)
     {
         /*
          * Если requested не передан берем его из REQUEST_URI
          * */
         if($requestedUrl === null){
-            $uri = reset(explode('?', $_SERVER['REQUEST_URI']));
+            $uri = explode("?", $_SERVER['REQUEST_URI']);
+            $uri = reset($uri);
             //$requestedUrl = urldecode(rtrim($uri, '/'));
             $requestedUrl = urldecode($uri);
         }
@@ -45,11 +46,11 @@ class Router
         foreach(self::$routes as $route => $uri){
             //Заменем WildCards на регулярное ввыражение
             if(strpos($route, ':') !== false){
-                $route = str_replace(':any', '()', str_replace(':num', '([0-9]+|)', $route));
+                $route = str_replace(':any', '(.+)', str_replace(':num', '([0-9]+|)', $route));
             }
             echo $route . " - ". $requestedUrl . "<br>";
             if(preg_match('#^'.$route.'$#i', $requestedUrl)){
-                echo 1;
+                //echo 1;
                 if(strpos($uri, '$') !== false && strpos($route, '(') !== false){
                     $uri = preg_replace('#^'.$route.'$#', $uri, $requestedUrl);
                 }
