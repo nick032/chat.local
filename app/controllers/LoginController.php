@@ -1,12 +1,10 @@
 <?php
-
-/**
- * Created by PhpStorm.
- * User: Nick
- * Date: 22.03.2017
- * Time: 19:56
- */
-class LoginController
+class LoginController extends Controller
 {
-
+    public static function index()
+    {
+        echo "Авторизация - контроллер";
+        $params = ['title' => 'Hello world', 'number' => 12];
+        parent::render('login', $params);
+    }
 }

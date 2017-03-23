@@ -18,8 +18,9 @@ spl_autoload_register(function($className){
 // Автозагрузка классов из app/core
 spl_autoload_register(function($className){
     $filePath = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "app" . DIRECTORY_SEPARATOR . "core" . DIRECTORY_SEPARATOR . $className . ".php";
-    if(file_exists($filePath))
+    if(file_exists($filePath)) {
         require_once($filePath);
+    }
     else{
         echo "Ошибка загрузка класса " . $className;
     }

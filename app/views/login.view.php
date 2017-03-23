@@ -1,7 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Nick
- * Date: 22.03.2017
- * Time: 19:58
- */
+<h1>Логин</h1>
+<p><?=$params['title']?></p>
+<div class="1"><?=$params['number']?></div>
