@@ -1,11 +1,28 @@
 <?php
+
+/**
+ * Class Router
+ */
 class Router
 {
+     /**
+     * @var array
+     */
     private static $routes = array();
+    /**
+     * @var array
+     */
     private static $params = array();
+    /**
+     * @var string
+     */
     private static $requestedUrl = '';
     /*
      * Добавление маршрута
+     */
+    /**
+     * @param $route
+     * @param null $distination
      */
     public static function addRoute($route, $distination = null)
     {

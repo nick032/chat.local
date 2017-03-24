@@ -1,9 +1,9 @@
 <?php
 
-class AuthController
+class AuthController extends Controller
 {
     public static function index(){
-        echo "Авторизация";
+        self::render();
     }
     public function logout(){
 

@@ -1,8 +1,9 @@
 <?php
-class LogoutController
+class LogoutController extends Controller
 {
     public static function index()
     {
-        echo "Выход - контроллер";
+        Session::destroy();
+        parent::render();
     }
 }

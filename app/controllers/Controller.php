@@ -1,8 +1,9 @@
 <?php
+
 class Controller
 {
-    protected static function render($view, array $params)
+    protected static function render($view = 'index', $params = [])
     {
-        include("./app/views/".$view.".view.php");
+        include("./app/views/$view.view.php");
     }
 }
