@@ -7,19 +7,15 @@ class User
     private $pass;
     private static $instance;
 
-    private function __construct($name, $email, $pass)
+    private function __construct()
     {
-        $this->name = $this->validateName($name);
-        $this->email = $this->validateEmail($email);
-        $this->pass = $this->hash($pass);
-
         return $this;
     }
 
-    public static function instance($name, $email, $pass)
+    public static function create()
     {
         if (!is_object(self::$instance))
-            self::$instance = new User($name, $email, $pass);
+            self::$instance = new User();
         return self::$instance;
     }
 
@@ -28,12 +24,12 @@ class User
         return $this->name;
     }
 
-    protected function validateName($name)
+    public static function validateName($name)
     {
         return $name;
     }
 
-    protected function validateEmal($email)
+    protected function validateEmail($email)
     {
         return $email;
     }
@@ -48,8 +44,11 @@ class User
         return true;
     }
 
-    public function auth()
+    public static function auth()
     {
-        return true;
+        $sql = "SELECT * FROM users WHERE sid = ?";
+        $result = DB::prepare($sql)->execute([Session::getSID()])->fetch();
+        if(!empty($result)) return true;
+        return false;
     }
 }

@@ -9,7 +9,7 @@ class Route
     }
     public static function dispatch()
     {
-        $uri = $_SERVER['REQUEST_URI'];
+        $uri =  rtrim($_SERVER['REQUEST_URI'], '/');
         $controller = 'MainController';
         foreach(self::$routes as $route => $dist){
             if($route === $uri){

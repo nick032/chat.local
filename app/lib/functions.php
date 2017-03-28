@@ -25,3 +25,9 @@ spl_autoload_register(function($className){
         echo "Ошибка загрузка класса " . $className;
     }
 });
+
+function validate_form_field($str){
+    $result = htmlspecialchars($str);
+    $result = urldecode($result);
+    return trim($result);
+}
