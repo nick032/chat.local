@@ -1,0 +1,14 @@
+{
+    "name": "nick/chat.local",
+    "authors": [
+        {
+            "name": "nick032",
+            "email": "nick.x.a.k@gmail.com"
+        }
+    ],
+    "autoload":{
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
